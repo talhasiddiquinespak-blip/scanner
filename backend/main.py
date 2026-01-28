@@ -2,8 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from app.api.scan import router as scan_router
-from app.api.download import router as download_router
+from backend.app.api.scan import router as scan_router
+from backend.app.api.download import router as download_router
 
 app = FastAPI(
     title="Letter Scanner System",
@@ -30,3 +30,4 @@ app.mount(
 # API routes
 app.include_router(scan_router, prefix="/api")
 app.include_router(download_router, prefix="/api")
+
