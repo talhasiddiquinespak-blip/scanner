@@ -11,6 +11,7 @@ app = FastAPI(
     description="Scan letters, extract data using OCR + Gemini AI, update Excel automatically"
 )
 
+# CORS (safe for now)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,7 +20,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/", StaticFiles(directory="backend/app/static", html=True), name="static")
+# Serve frontend
+app.mount(
+    "/",
+    StaticFiles(directory="backend/app/static", html=True),
+    name="static",
+)
 
-app.include_router(scan_router)
-app.include_router(download_router)
+# API routes
+app.include_router(scan_router, prefix="/api")
+app.include_router(download_router, prefix="/api")
