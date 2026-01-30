@@ -2,9 +2,9 @@ from fastapi import APIRouter, UploadFile, File, HTTPException
 from uuid import uuid4
 import os
 
-from app.services.ocr_service import extract_text_from_image
-from app.services.ai_parser import extract_letter_fields
-from app.utils.excel_registry import append_letter_record
+from backend.services.ocr_service import extract_text_from_image
+from backend.services.ai_parser import extract_letter_fields
+from backend.utils.excel_registry import append_letter_record
 
 router = APIRouter()
 
@@ -49,3 +49,4 @@ async def scan_letter(file: UploadFile = File(...)):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
